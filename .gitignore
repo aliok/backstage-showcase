@@ -39,10 +39,10 @@ dist-types
 site
 
 # Local configuration files
-*.local.yaml
+#*.local.yaml
 
 # Sensitive credentials
-*-credentials.local.yaml
+#*-credentials.local.yaml
 
 # vscode database functionality support files
 *.session.sql

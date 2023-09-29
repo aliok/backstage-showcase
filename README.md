@@ -79,3 +79,41 @@ You can find the Backstage Showcase app running at <https://showcase.janus-idp.i
 For more information on our plugin offerings, consult the [Janus IDP Backstage Plugins](https://github.com/janus-idp/backstage-plugins) repo.
 
 Want to know more about Backstage, consult the [documentation](https://backstage.io/docs/overview/what-is-backstage) and [GitHub](https://github.com/backstage/backstage) repo.
+
+NOTE: token work
+
+1. create a new service account in the kube-system namespace
+   `kubectl -n kube-system create serviceaccount backstage-admin`
+2. create a clusterrolebinding
+   `kubectl create clusterrolebinding backstage-admin --clusterrole=cluster-admin --serviceaccount=kube-system:backstage-admin`
+3. create a secret for the service account
+
+```shell
+kubectl apply -f - <<EOF
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: backstage-admin
+    namespace: kube-system
+    annotations:
+      kubernetes.io/service-account.name: backstage-admin
+  type: kubernetes.io/service-account-token
+EOF
+```
+
+4. get the token
+   `export TOKEN=$(kubectl -n kube-system get secret backstage-admin -o jsonpath='{.data.token}' | base64 --decode)`
+5. run a sanity check
+   curl -k -H "Authorization: Bearer $TOKEN" -X GET "https://api......serverless.devcluster.openshift.com:6443" | json_pp
+
+export GITHUB*ENABLED="true"
+export GITHUB_ORG_ENABLED="true"
+export K8S_ENABLED="true"
+export BACKSTAGE_GITHUB_TOKEN="ghp*..."
+export AUTH_GITHUB_CLIENT_ID="cf..."
+export AUTH_GITHUB_CLIENT_SECRET="...."
+export GITHUB_ORG_URL="https://github.com/aliok-test"
+export GITHUB_ORG="aliok-test"
+export K8S_CLUSTER_NAME="aliok-openshift"
+export K8S_CLUSTER_URL="https://api......serverless.devcluster.openshift.com:6443"
+export K8S_CLUSTER_TOKEN="eyJhbGc........xKOjw"
