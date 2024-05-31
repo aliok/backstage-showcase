@@ -1,0 +1,6 @@
+{
+  "name": "@knative-extensions/plugin-knative-event-mesh-backend",
+  "version": "0.0.0-nightly",
+  "main": "../dist/alpha.cjs.js",
+  "types": "../dist/alpha.d.ts"
+}
