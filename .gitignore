@@ -14,6 +14,7 @@ coverage
 
 # Dependencies
 node_modules/
+!dynamic-plugins-root/knative-extensions-plugin-knative-event-mesh-backend-dynamic-0.0.0-nightly/node_modules/
 
 # Yarn 3 files
 .pnp.*
@@ -30,6 +31,7 @@ node_modules/
 
 # Build output
 dist
+!dynamic-plugins-root/knative-extensions-plugin-knative-event-mesh-backend-dynamic-0.0.0-nightly/dist/
 dist-types
 dist-scalprum
 
@@ -52,6 +54,7 @@ site
 
 # Dynamic plugins root content
 dynamic-plugins-root/*
+!dynamic-plugins-root/knative-extensions-plugin-knative-event-mesh-backend-dynamic-0.0.0-nightly/
 !dynamic-plugins-root/.gitkeep
 dynamic-plugins/wrappers/*/dist-dynamic/src
 dynamic-plugins/imports/*/
